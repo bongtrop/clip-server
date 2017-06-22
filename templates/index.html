@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <title>Clip Everything Here | CnC-</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.3.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stroke.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/prettyPhoto.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='js/syntax-highlighter/styles/shCore.css') }}" media="all">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='js/syntax-highlighter/styles/shThemeRDark.css') }}" media="all">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <section id="top" class="section docs-heading">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="big-title text-center">
+                            <h1>Clip Everything Here</h1>
+                            <p class="lead"><b>Fast</b> and <b>Easy</b> to used</p>
+                        </div>
+                    </div>
+                    <!-- end 12 -->
+                </div>
+                <!-- end row -->
+
+                <hr>
+
+            </section>
+            <!-- end section -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="welcome">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Introduction<hr></h2>
+                                <div class="row">
+
+                                    <div class="col-md-12 full">
+                                        <div class="intro1">
+                                            <ul>
+                                                <li><strong>Name : </strong>clip-server</li>
+                                                <li><strong>Version : </strong> v 1.0</li>
+                                                <li><strong>Author  : </strong> <a href="https://crypto.rop.sh" target="_blank">Pongsakorn Sommalai</a></li>
+                                                <li><strong>Github : </strong> <a href="https://github.com/bongtrop/clip-server" target="_blank">https://github.com/bongtrop/clip-server</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <hr>
+                                        <div>
+                                            <p> This project was created with relay system idea. We want some system that can only receive, send and hold data in short time.
+                                                <strong>It's not secure at all!</strong>
+                                                <br> If you want to use it, please make sure you don't put sensitive data or encrypt it already.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- end row -->
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="line1" class="section">
+
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Getting Started <a href="#top">back to top</a><hr></h2>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>This system have 4 actions save, edit, delete and get with http verb POST, PUT, DELETE and GET. The datas will store only 30s. I will example with curl.</p>
+
+                                <table>
+                                    <tr>
+                                        <th>Status code</th>
+                                        <th>Meaning</th>
+                                    </tr>
+                                    <tr>
+                                        <td>200</td>
+                                        <td>Action OK</td>
+                                    </tr>
+                                    <tr>
+                                        <td>201</td>
+                                        <td>Clip created</td>
+                                    </tr>
+                                    <tr>
+                                        <td>404</td>
+                                        <td>Clip not found</td>
+                                    </tr>
+                                    <tr>
+                                        <td>406</td>
+                                        <td>Save clip error</td>
+                                    </tr>
+                                    <tr>
+                                        <td>409</td>
+                                        <td>Duplicate clip</td>
+                                    </tr>
+                                </table>
+
+                                <h4>Action get (GET)</h4>
+
+                                <pre class="brush: bash">
+                                    # example with curl
+                                    curl http://server/your_clip_name
+
+                                    # result
+                                    # your_data_here
+                                </pre>
+
+                                <pre class="brush: python">
+                                    # example with request-python 
+                                    r = requests.get("http://server/your_clip_name")
+                                    print r.content
+
+                                    # result
+                                    # your_data_here 
+                                </pre>
+
+                                <h4>Action save (POST)</h4>
+
+                                <pre class="brush: bash">
+                                    # example with curl
+                                    curl -X POST --data "your_data_here" -i http://server/your_clip_name
+
+                                    # result
+                                    # HTTP/1.0 201 CREATED
+                                    # Content-Type: text/html; charset=utf-8
+                                    # Content-Length: 0
+                                    # Server: clip-server/v...
+                                </pre>
+
+                                <pre class="brush: python">
+                                    # example with request-python 
+                                    r = requests.post("http://server/your_clip_name", data="your_data_here")
+                                    print r.status_code
+
+                                    # result
+                                    # 201
+                                </pre>
+
+                                <h4>Action save (PUT)</h4>
+
+                                <pre class="brush: bash">
+                                    # example with curl
+                                    curl -X PUT --data "your_data_here" -i http://server/your_clip_name
+
+                                    # result
+                                    # HTTP/1.0 200 OK
+                                    # Content-Type: text/html; charset=utf-8
+                                    # Content-Length: 0
+                                    # Server: clip-server/v...
+                                </pre>
+
+                                <pre class="brush: python">
+                                    # example with request-python 
+                                    r = requests.put("http://server/your_clip_name", data="your_data_here")
+                                    print r.status_code
+
+                                    # result
+                                    # 200
+                                </pre>
+
+                                <h4>Action save (DELETE)</h4>
+
+                                <pre class="brush: bash">
+                                    # example with curl
+                                    curl -X DELETE http://server/your_clip_name
+
+                                    # result
+                                    # HTTP/1.0 200 OK
+                                    # Content-Type: text/html; charset=utf-8
+                                    # Content-Length: 0
+                                    # Server: clip-server/v...
+                                </pre>
+
+                                <pre class="brush: python">
+                                    # example with request-python 
+                                    r = requests.delete("http://server/your_clip_name")
+                                    print r.status_code
+
+                                    # result
+                                    # 200
+                                </pre>
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    </section>
+                    <!-- end section -->
+                </div>
+                <!-- // end .col -->
+
+            </div>
+            <!-- // end .row -->
+
+        </div>
+        <!-- // end container -->
+
+    </div>
+    <!-- end wrapper -->
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/retina.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fitvids.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wow.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.prettyPhoto.js') }}"></script>
+
+    <!-- CUSTOM PLUGINS -->
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/syntax-highlighter/scripts/shCore.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/syntax-highlighter/scripts/shBrushXml.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/syntax-highlighter/scripts/shBrushBash.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/syntax-highlighter/scripts/shBrushPython.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/syntax-highlighter/scripts/shBrushCss.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/syntax-highlighter/scripts/shBrushJScript.js') }}"></script>
+
+</body>
+
+</html>
