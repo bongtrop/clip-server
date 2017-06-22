@@ -12,7 +12,7 @@ CLIP_PATH = "/tmp/clip"
 TIMEOUT = 1800.0
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+
 shutil.rmtree(CLIP_PATH, ignore_errors=True)
 os.makedirs(CLIP_PATH)
 
@@ -42,6 +42,10 @@ def _get_clip(name):
         return f.read()
     
     return ""
+
+def _delete_clip(name):
+    del clips[name]
+    os.remove(_path(name))
 
 @app.after_request
 def apply_caching(response):
@@ -83,15 +87,16 @@ def clip(name):
     
     elif request.method == 'DELETE':
         if _is_exist(name):
-            del clips[name]
-            os.remove(_path(name))
+            _delete_clip(name)
             return "", 200
 
         return "", 404
     
     else:
         if _is_exist(name):
-            return _get_clip(name), 200, {'Content-Type': 'application/octet-stream'}
+            content = _get_clip(name), 200, {'Content-Type': 'application/octet-stream'}
+            _delete_clip(name)
+            return content
         
         return "", 404
 
